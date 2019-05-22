@@ -3,3 +3,8 @@ Uma rede neural escrita em Python, consistindo de um único neurônio que usa a 
 
 ### Dependências
 1. numpy
+
+### Caso precise instalar o Numpy
+
+1. Abra o terminal pressione Win+R e digite CMD
+2. Digite "pip install numpy"
