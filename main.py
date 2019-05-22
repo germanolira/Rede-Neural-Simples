@@ -3,72 +3,72 @@ from numpy import exp, array, random, dot
 
 class NeuralNetwork():
     def __init__(self):
-        # Seed the random number generator, so it generates the same numbers
-        # every time the program runs.
+        # Semeia o gerador de números aleatórios, por isso gera os mesmos números
+        # toda vez que o programa roda.
         random.seed(1)
 
-        # We model a single neuron, with 3 input connections and 1 output connection.
-        # We assign random weights to a 3 x 1 matrix, with values in the range -1 to 1
-        # and mean 0.
+        # Nós modelamos um único neurônio, com 3 conexões de entrada e 1 conexão de saída.
+        # Atribuímos pesos aleatórios a uma matriz 3 x 1, com valores no intervalo de -1 a 1
+        # e significa 0.
         self.synaptic_weights = 2 * random.random((3, 1)) - 1
 
-    # The Sigmoid function, which describes an S shaped curve.
-    # We pass the weighted sum of the inputs through this function to
-    # normalise them between 0 and 1.
+    # A função sigmóide, que descreve uma curva em forma de S.
+    # Nós passamos a soma ponderada das entradas através desta função para
+    # normalize-os entre 0 e 1.
     def __sigmoid(self, x):
         return 1 / (1 + exp(-x))
 
-    # The derivative of the Sigmoid function.
-    # This is the gradient of the Sigmoid curve.
-    # It indicates how confident we are about the existing weight.
+    # A derivada da função Sigmoide.
+    # Este é o gradiente da curva sigmóide.
+    # Isso indica como estamos confiantes sobre o peso existente.
     def __sigmoid_derivative(self, x):
         return x * (1 - x)
 
-    # We train the neural network through a process of trial and error.
-    # Adjusting the synaptic weights each time.
+    # Nós treinamos a rede neural através de um processo de tentativa e erro.
+    # Ajustando os pesos sinápticos a cada vez.
     def train(self, training_set_inputs, training_set_outputs, number_of_training_iterations):
-        for iteration in xrange(number_of_training_iterations):
-            # Pass the training set through our neural network (a single neuron).
+        for iteration in range(number_of_training_iterations):
+            # Passe o conjunto de treinamento através da nossa rede neural (um único neurônio).
             output = self.think(training_set_inputs)
 
-            # Calculate the error (The difference between the desired output
-            # and the predicted output).
+            # Calcule o erro (a diferença entre a saída desejada
+            # e a saída prevista).
             error = training_set_outputs - output
 
-            # Multiply the error by the input and again by the gradient of the Sigmoid curve.
-            # This means less confident weights are adjusted more.
-            # This means inputs, which are zero, do not cause changes to the weights.
+            # Multiplique o erro pela entrada e novamente pelo gradiente da curva Sigmoide.
+            # Isso significa que pesos menos confiantes são ajustados mais.
+            # Isso significa que as entradas, que são zero, não causam alterações nos pesos.
             adjustment = dot(training_set_inputs.T, error * self.__sigmoid_derivative(output))
 
-            # Adjust the weights.
+            # Ajuste os pesos.
             self.synaptic_weights += adjustment
 
-    # The neural network thinks.
+    # A rede neural pensa.
     def think(self, inputs):
-        # Pass inputs through our neural network (our single neuron).
+        # Passe as entradas através da nossa rede neural (nosso único neurônio).
         return self.__sigmoid(dot(inputs, self.synaptic_weights))
 
 
 if __name__ == "__main__":
 
-    #Intialise a single neuron neural network.
+    # Inicialize uma rede neural de um único neurônio.
     neural_network = NeuralNetwork()
 
-    print "Random starting synaptic weights: "
-    print neural_network.synaptic_weights
+    print ("Pesos sinápticos iniciais aleatórios: ")
+    print (neural_network.synaptic_weights)
 
-    # The training set. We have 4 examples, each consisting of 3 input values
-    # and 1 output value.
+    # O conjunto de treinamento. Nós temos 4 exemplos, cada um consistindo em 3 valores de entrada
+    # e 1 valor de saída.
     training_set_inputs = array([[0, 0, 1], [1, 1, 1], [1, 0, 1], [0, 1, 1]])
     training_set_outputs = array([[0, 1, 1, 0]]).T
 
-    # Train the neural network using a training set.
-    # Do it 10,000 times and make small adjustments each time.
+    # Treine a rede neural usando um conjunto de treinamento.
+    # Faça isso 10.000 vezes e faça pequenos ajustes a cada vez.
     neural_network.train(training_set_inputs, training_set_outputs, 10000)
 
-    print "New synaptic weights after training: "
-    print neural_network.synaptic_weights
+    print ("Novos pesos sinápticos depois do treinamento: ")
+    print (neural_network.synaptic_weights)
 
-    # Test the neural network with a new situation.
-    print "Considering new situation [1, 0, 0] -> ?: "
-    print neural_network.think(array([1, 0, 0]))
+    # Teste a rede neural com uma nova situação.
+    print ("Considerando nova situação [1, 0, 0] -> ?: ")
+    print (neural_network.think(array([1, 0, 0])))
