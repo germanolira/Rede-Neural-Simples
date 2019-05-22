@@ -14,4 +14,5 @@ Uma rede neural escrita em Python, consistindo de um único neurônio que usa a 
 (http://twixar.me/Mlvn1)
 
 Thank you Milo Spencer-Harper, for sharing your knowledge with the world
-(https://medium.com/@miloharper)
+Perfil no Medium: (https://medium.com/@miloharper)
+Github: (https://github.com/miloharper)
