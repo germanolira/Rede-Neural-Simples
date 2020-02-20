@@ -16,3 +16,5 @@ Uma rede neural escrita em Python, consistindo de um único neurônio que usa a 
 Thank you Milo Spencer-Harper, for sharing your knowledge with the world
 Perfil no Medium: (https://medium.com/@miloharper)
 Github: (https://github.com/miloharper)
+
+Atualizaçoes em breve
